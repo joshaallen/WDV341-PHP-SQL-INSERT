@@ -42,10 +42,6 @@ if(isset($_POST["submit"])) {
     $validForm= false;
     $errorEventTimeMsg= "Please supply an event time";
   }
-  else {
-        //concataniting seconds onto eventTime value in prep for inserting into database
-        $eventTime .= ":00";
-   }
   //Determine if form has error messages 
   if($validForm) {
     try {
@@ -168,6 +164,9 @@ if(isset($_POST["submit"])) {
       <p>The id of the last record you inserted is:<?php echo $lastInsertID; ?> </p>
     </div>
     <?php
+          //redirect
+          header("refresh:5; url=eventsForm.php");
+          return;
       }
       else {
         $endOfResposeObject = true;
@@ -195,15 +194,15 @@ if(isset($_POST["submit"])) {
       </div>
       <div>
       <label for="eventName">Name:</label>
-      <input type="text" name="eventName" id="eventName">
+      <input type="text" name="eventName" id="eventName" required>
       </div>
       <div>
       <label for="eventDescription">Description:</label>
-      <input type="text" name="eventDescription" id="eventDescription">
+      <input type="text" name="eventDescription" id="eventDescription" required>
       </div>
       <div>
       <label for="eventPresenter">Presenter:</label>
-      <input type="text" name="eventPresenter" id="eventPresenter">
+      <input type="text" name="eventPresenter" id="eventPresenter" required>
       </div>
       <div>
       <label for="eventDate">Date:</label>
@@ -211,10 +210,11 @@ if(isset($_POST["submit"])) {
       </div>      
       <div>
       <label for="eventTime">Time:</label>
-      <input type="time" name="eventTime" id="eventTime">
+      <input type="time" name="eventTime" id="eventTime" required step="2">
       </div>     
       <input type="submit" name="submit" value="submit">
       <input type="reset" name="reset" value="reset"> 
+      <div><a href="../WDV341-PHP-LOGIN-AND-PROTECTED-PAGES/login.php">Login</a></div>
       </fieldset>
      </form>
       <!--
